@@ -1,4 +1,8 @@
 class TasksController < ApplicationController
+    def index
+      @task=Task.all
+    end 
+   
     def show
       @task = Task.find(params[:id])  
     end
@@ -34,10 +38,6 @@ class TasksController < ApplicationController
         @task=Task.new
     end
     
-    def index
-        @task=Task.all
-    end
-    
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
@@ -54,6 +54,6 @@ class TasksController < ApplicationController
   private
   
     def task_params
-        params.require(:task).permit(:content)
+        params.require(:task).permit(:content,:status)
     end
 end
