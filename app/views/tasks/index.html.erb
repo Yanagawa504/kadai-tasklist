@@ -4,6 +4,7 @@
 <li><%= link_to task.id, task_path(task) %>タスク： <%= task.content %>　ステータス:<%= task.status%> </li>
 <% end%>
 </ul>
+<%= link_to 'Sign up now!', signup_path %>
 <p><%= link_to "新規作成", new_task_path %></p>
 
 

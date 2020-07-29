@@ -1,0 +1,22 @@
+
+<h1>SignUP</h1>
+<div>
+<%= form_with(model: @user, local: true) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    
+    
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %>
+    
+    <%= f.label :email, "Email" %>
+    <%= f.text_field :email %>
+    
+    <%= f.label :password, "PASSWORD" %>
+    <%= f.text_field :password %>
+    
+    <%= f.label :password_confirmation, "Confirmation" %>
+    <%= f.text_field :password_confirmation %>
+    
+    <%= f.submit "SignUP" %>
+    <% end %>
+</div>
