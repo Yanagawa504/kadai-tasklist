@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     
     if login(email,password)
       flash[:success]="ログイン成功"
-      redirect_to @user
+      redirect_to root_url
     else
       flash[:danger]="ログインしっぱい"
       render :new

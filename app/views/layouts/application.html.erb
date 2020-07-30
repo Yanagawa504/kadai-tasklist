@@ -19,8 +19,8 @@
       
       <ul>
       <% if logged_in? %>
-        <li><%= link_to 'MyProfile', user_path(current_user)%></li>
-        <li><%= link_to 'LogOut', logout_path, method: :delete%></li>
+        
+        <li><%= link_to 'LogOut', logout_path, method: :delete, data: { confirm: '本当にログアウトしてよろしいですか？' }%></li>
       
       <% else %>
         <li><%= link_to 'Signup', signup_path%></li>

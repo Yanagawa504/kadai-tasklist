@@ -1,7 +1,0 @@
-<% if users.any? %>
-  <% users.each do |user| %>
-    <%= user.name %>
-    <p><%= link_to 'Viewprofile', user_path(user) %></p>
-  <% end %>
-  <%= paginate users %>
-<% end %>

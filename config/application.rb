@@ -28,6 +28,7 @@ module Tasklist
     # the framework and any gems in your application.
 
     # Don't generate system test files.
+    config.time_zone = 'Tokyo'
     config.generators.system_tests = nil
   end
 end

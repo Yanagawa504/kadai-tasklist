@@ -1,14 +1,46 @@
 <% if logged_in? %>
-    <p>ログイン完了ユーザ <%= current_user.name %></p>
+
+    <% time_japan = Time.now.getlocal("+09:00") %>
+    <% if 6 <= time_japan.hour && time_japan.hour < 12 %>
+      <p>おはよう、<%= current_user.name %>さん</p>
+    <% elsif 12 <= time_japan.hour && time_japan.hour < 18 %>
+      <p>こんにちは、<%=current_user.name %>さん</p>
+    <% else %>
+      <p>こんばんは、<%= current_user.name %>さん</p>
+    <% end %>
+    <h3><%= link_to "新規タスク作成", new_task_path %></h3>
+    
+    
+    <table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>タスク</th>
+            <th>ステータス</th>
+            <th>作成時間</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <% @tasks.each do |task| %>
+        <tr>
+            <td><%= link_to task.id, task %></td>
+            <td><%= task.content %></td>
+            <td><%= task.status %></td>
+            <td><%= task.created_at.to_s(:datetime_jp) %></td>
+            <td><%= link_to "タスクの詳細", task_path(task) %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+        
+       
+       
+    
 <% else %>
-<h1>タスクリスト</h1>
-<ul>
-<% @task.each do |task| %>
-<li><%= link_to task.id, task_path(task) %>タスク： <%= task.content %>　ステータス:<%= task.status%> </li>
-<% end%>
-</ul>
-<%= link_to 'Sign up now!', signup_path %>
-<p><%= link_to "新規作成", new_task_path %></p>
+
+<h1><%= link_to 'Sign up now!', signup_path %></h1>
+
 <% end %>
 
 
