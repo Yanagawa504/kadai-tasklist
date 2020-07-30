@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
+  before_action :require_user_logged_in
   def index
     if logged_in?
-      @task = current_user.tasks.build  # form_with 用
       @tasks = current_user.tasks.order(id: :desc).page(params[:page])
     else
       redirect_to login_url
@@ -10,23 +10,34 @@ class TasksController < ApplicationController
   end  
    
     def show
-      @task = Task.find(params[:id])  
+      @id=params[:id]
+      @bunki=0
+      @allid=current_user.tasks.all
+      @allid.each do |s|
+        if s.id.to_s==@id
+          @bunki=1
+        end
+      end
+        if @bunki==1
+          @task=current_user.tasks.find(@id)
+        else
+          flash[:danger] = 'あなたのタスクではありません'
+          redirect_to root_url
+        end
+      #end
     end
     
     def create
       @task = current_user.tasks.build(task_params)
 
       if @task.save
-        flash[:success] = 'Task が正常に投稿されました'
-        redirect_to root_url
+       
       else
         flash.now[:danger] = 'Task が投稿されませんでした'
         render :new
       end
           
     end
-    
-  
     
     def update
          @task = Task.find(params[:id])
